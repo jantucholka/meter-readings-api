@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using MeterReading.Logic;
 using MeterReadings.Schema;
+using Swashbuckle.Swagger.Annotations;
 
 namespace MeterReadingsAPI.Controllers
 {
@@ -19,6 +19,7 @@ namespace MeterReadingsAPI.Controllers
             _meterReadingFacade = meterReadingFacade ?? throw new ArgumentNullException(nameof(meterReadingFacade));
         }
 
+        [SwaggerResponse(HttpStatusCode.OK, "Summary of the meter reading upload action", typeof(AddMeterStatusResponse))]
         public async Task<IHttpActionResult> Post()
         {
             if (!Request.Content.IsMimeMultipartContent())
