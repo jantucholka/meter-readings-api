@@ -18,7 +18,7 @@ namespace MeterReading.Logic
         {
             _meterReadingsRepository = meterReadingsRepository ??
                                             throw new ArgumentNullException(nameof(meterReadingsRepository));
-            _meterReadingLenientValidator = meterReadingLenientValidator ?? 
+            _meterReadingLenientValidator = meterReadingLenientValidator ??
                                             throw new ArgumentNullException(nameof(meterReadingLenientValidator));
         }
 
@@ -58,12 +58,12 @@ namespace MeterReading.Logic
             var readingsRejectedByTheDatabase = readingsToAdd
                 .Where(readingToAdd => successfullyAddedReadings
                     .All(
-                        addedReading => 
+                        addedReading =>
                             !(readingToAdd.AccountId == addedReading.AccountId &&
                             readingToAdd.MeterReadingDateTime == addedReading.MeterReadingDateTime &&
                             readingToAdd.MeterReadValue == addedReading.MeterReadValue)
                         ));
-            
+
             errorMessages.AddRange(readingsRejectedByTheDatabase.Select(failedToAddReading => $"{failedToAddReading} - AccountId doesn't exist or reading has already been added"));
 
             return new AddMeterStatusResponse()
@@ -74,5 +74,15 @@ namespace MeterReading.Logic
             };
         }
 
+        public async Task<Guid?> AddMeterReading(MeterReadings.Schema.MeterReading meterReading)
+        {
+            var successfullyAddedReadings = await _meterReadingsRepository.AddReadings(new[] { meterReading });
+
+            return successfullyAddedReadings.FirstOrDefault()?.Id;
+        }
+
+        public Task<IEnumerable<MeterReadings.Schema.MeterReading>> GetReadings() => _meterReadingsRepository.GetReadings();
+        public Task DeleteReading(Guid id) => _meterReadingsRepository.DeleteReading(id);
+        public Task<MeterReadings.Schema.MeterReading> GetReading(Guid id) => _meterReadingsRepository.GetReading(id);
     }
 }

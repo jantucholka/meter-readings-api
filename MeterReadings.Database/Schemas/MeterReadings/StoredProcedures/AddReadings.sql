@@ -15,8 +15,8 @@ AS
 		TARGET.MeterReadValue = SOURCE.MeterReadValue 
 	WHEN NOT MATCHED AND EXISTS (SELECT * FROM [MeterReadings].[Account] WHERE SOURCE.AccountId = AccountId)
 		THEN
-			INSERT ([AccountId],[MeterReadingDateTime],[MeterReadValue]) 
-			VALUES (SOURCE.AccountId, SOURCE.MeterReadingDateTime, SOURCE.MeterReadValue)
+			INSERT ([Id],[AccountId],[MeterReadingDateTime],[MeterReadValue]) 
+			VALUES (NEWID(), SOURCE.AccountId, SOURCE.MeterReadingDateTime, SOURCE.MeterReadValue)
 	OUTPUT INSERTED.*;
 RETURN 0
 

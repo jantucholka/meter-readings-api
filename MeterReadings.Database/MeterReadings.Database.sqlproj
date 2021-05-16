@@ -67,6 +67,8 @@
     <Build Include="Schemas\MeterReadings\Tables\Reading.sql" />
     <Build Include="Schemas\MeterReadings\StoredProcedures\AddReadings.sql" />
     <Build Include="Schemas\MeterReadings\StoredProcedures\GetAllReadings.sql" />
+    <Build Include="Schemas\MeterReadings\StoredProcedures\DeleteReading.sql" />
+    <Build Include="Schemas\MeterReadings\StoredProcedures\GetReading.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MeterReadings.Database.refactorlog" />

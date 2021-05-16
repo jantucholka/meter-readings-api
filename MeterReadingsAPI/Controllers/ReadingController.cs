@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using MeterReading.Logic;
-using MeterReadings.Schema;
 
 namespace MeterReadingsAPI.Controllers
 {
@@ -20,47 +18,44 @@ namespace MeterReadingsAPI.Controllers
         }
 
         // GET: api/Reading
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<MeterReadings.Schema.MeterReading>> Get()
         {
-            return new [] { "value1", "value2" };
+            return await _meterReadingFacade.GetReadings();
         }
 
         // GET: api/Reading/5
-        public string Get(int id)
+        public async Task<IHttpActionResult> Get(Guid id)
         {
-            return "value";
-        }
+            var reading = await _meterReadingFacade.GetReading(id);
 
-        //// POST: api/Reading
-        //public void Post([FromBody]string value)
-        //{
-        //}
+            if (reading != null)
+            {
+                return new NegotiatedContentResult<MeterReadings.Schema.MeterReading>(HttpStatusCode.OK, reading, this);
+            }
+
+            return NotFound();
+        }
 
         // POST: api/Reading
-
-
-        public async Task<IHttpActionResult> Post()
+        public async Task<IHttpActionResult> Post(MeterReadings.Schema.MeterReading meterReading)
         {
-            if (!Request.Content.IsMimeMultipartContent())
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            var readingId = await _meterReadingFacade.AddMeterReading(meterReading);
 
-            var provider = new MultipartMemoryStreamProvider();
-            await Request.Content.ReadAsMultipartAsync(provider);
+            if (readingId.HasValue)
+            {
+                return new NegotiatedContentResult<Guid>(HttpStatusCode.Created,
+                    readingId.Value, this);
+            }
 
-            var response = await _meterReadingFacade.AddMeterReadings(provider.Contents);
-
-            return new NegotiatedContentResult<AddMeterStatusResponse>(HttpStatusCode.OK,
-                response, this);
-        }
-
-        // PUT: api/Reading/5
-        public void Put(int id, [FromBody]string value)
-        {
+            return BadRequest();
         }
 
         // DELETE: api/Reading/5
-        public void Delete(int id)
+        public async Task<HttpStatusCode> Delete(Guid id)
         {
+            await _meterReadingFacade.DeleteReading(id);
+
+            return HttpStatusCode.NoContent;
         }
     }
 }
