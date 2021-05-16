@@ -19,6 +19,7 @@ namespace MeterReadingsAPI.Controllers
             _meterReadingFacade = meterReadingFacade ?? throw new ArgumentNullException(nameof(meterReadingFacade));
         }
 
+        [SwaggerResponse(HttpStatusCode.BadRequest,"Only multipart content is allowed")]
         [SwaggerResponse(HttpStatusCode.OK, "Summary of the meter reading upload action", typeof(AddMeterStatusResponse))]
         public async Task<IHttpActionResult> Post()
         {
