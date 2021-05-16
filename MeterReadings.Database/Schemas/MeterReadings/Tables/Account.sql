@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Account]
+﻿CREATE TABLE [MeterReadings].[Account]
 (
 	[AccountId] INT NOT NULL PRIMARY KEY, 
     [FirstName] NVARCHAR(255) NOT NULL, 

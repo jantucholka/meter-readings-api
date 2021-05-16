@@ -1,7 +1,7 @@
 ﻿USE [MeterReadings.Database]
 GO
 
-INSERT INTO [dbo].[Account]
+INSERT INTO [MeterReadings].[Account]
            ([AccountId]
            ,[FirstName]
            ,[LastName])

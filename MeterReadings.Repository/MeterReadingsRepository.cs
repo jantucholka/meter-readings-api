@@ -30,7 +30,7 @@ namespace MeterReadings.Repository
                         table.Rows.Add(meterReading.AccountId, meterReading.MeterReadingDateTime, meterReading.MeterReadValue);
                     }
 
-                    command.CommandText = "[dbo].[AddReadings]";
+                    command.CommandText = "[MeterReadings].[AddReadings]";
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.Add("@newReadings", SqlDbType.Structured).Value = table;
