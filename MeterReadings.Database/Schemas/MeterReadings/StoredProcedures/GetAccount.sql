@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [MeterReadings].[GetAccount]
-	@id int
+	@AccountId int
 AS
-	SELECT * FROM [MeterReadings].[Account] WHERE AccountId = @id
+	SELECT * FROM [MeterReadings].[Account] WHERE AccountId = @AccountId
 RETURN 0
 
 GO

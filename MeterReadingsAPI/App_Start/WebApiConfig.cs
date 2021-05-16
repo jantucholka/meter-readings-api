@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using MeterReading.Logic;
+using MeterReading.Logic.Facades;
 using MeterReading.Logic.Validators;
 using MeterReadings.Repository;
 using Unity;

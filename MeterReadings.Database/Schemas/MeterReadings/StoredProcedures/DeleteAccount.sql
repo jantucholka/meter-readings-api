@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [MeterReadings].[DeleteAccount]
-	@id int
+	@AccountId int
 AS
-	DELETE FROM [MeterReadings].[Account] WHERE AccountId = @id
+	DELETE FROM [MeterReadings].[Account] WHERE AccountId = @AccountId
 RETURN 0
 
 GO

@@ -1,7 +1,7 @@
 ﻿CREATE TYPE Account as TABLE (
 	[AccountId] int NOT NULL, 
-    [FirstName] DATETIME NOT NULL, 
-    [LastName] int NOT NULL);
+    [FirstName] nvarchar(255) NOT NULL, 
+    [LastName] nvarchar(255) NOT NULL);
 GO
 
 CREATE PROCEDURE [MeterReadings].[AddAccounts]

@@ -72,12 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountFacade.cs" />
+    <Compile Include="Facades\AccountFacade.cs" />
     <Compile Include="CsvHelper.cs" />
-    <Compile Include="IAccountFacade.cs" />
+    <Compile Include="Facades\IAccountFacade.cs" />
     <Compile Include="SchemaExtensionMethods.cs" />
-    <Compile Include="IMeterReadingFacade.cs" />
-    <Compile Include="MeterReadingFacade.cs" />
+    <Compile Include="Facades\IMeterReadingFacade.cs" />
+    <Compile Include="Facades\MeterReadingFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\IMeterReadingLenientValidator.cs" />
     <Compile Include="Validators\MeterReadingLenientValidator.cs" />

@@ -8,7 +8,7 @@ using MeterReading.Logic.Validators;
 using MeterReadings.Repository;
 using MeterReadings.Schema;
 
-namespace MeterReading.Logic
+namespace MeterReading.Logic.Facades
 {
     public class MeterReadingFacade : IMeterReadingFacade
     {

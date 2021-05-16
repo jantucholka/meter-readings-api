@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
-using MeterReading.Logic;
+using MeterReading.Logic.Facades;
 using MeterReadings.Schema;
 using Swashbuckle.Swagger.Annotations;
 

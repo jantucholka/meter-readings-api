@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MeterReadings.Repository;
 using MeterReadings.Schema;
 
-namespace MeterReading.Logic
+namespace MeterReading.Logic.Facades
 {
     public class AccountFacade : IAccountFacade
     {

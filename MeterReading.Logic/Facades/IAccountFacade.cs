@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MeterReadings.Schema;
 
-namespace MeterReading.Logic
+namespace MeterReading.Logic.Facades
 {
     public interface IAccountFacade
     {
