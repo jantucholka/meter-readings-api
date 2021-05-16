@@ -8,12 +8,12 @@ using MeterReadings.Schema;
 
 namespace MeterReadings.Repository
 {
-    public class MeterReadingsRepository : IMeterReadingsRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["meterReadings"]
             .ConnectionString;
 
-        public async Task<IEnumerable<MeterReading>> AddReadings(IEnumerable<MeterReading> readings)
+        public async Task<IEnumerable<Account>> AddAccounts(IEnumerable<Account> accounts)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
@@ -21,26 +21,26 @@ namespace MeterReadings.Repository
                 using (var table = new DataTable())
                 {
                     table.Columns.Add("AccountId", typeof(int));
-                    table.Columns.Add("MeterReadingDateTime", typeof(DateTime));
-                    table.Columns.Add("MeterReadValue", typeof(int));
+                    table.Columns.Add("FirstName", typeof(string));
+                    table.Columns.Add("LastName", typeof(string));
 
-                    foreach (var meterReading in readings)
+                    foreach (var account in accounts)
                     {
-                        table.Rows.Add(meterReading.AccountId, meterReading.MeterReadingDateTime, meterReading.MeterReadValue);
+                        table.Rows.Add(account.AccountId, account.FirstName, account.LastName);
                     }
 
-                    command.CommandText = "[MeterReadings].[AddReadings]";
+                    command.CommandText = "[MeterReadings].[AddAccounts]";
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.Add("@newReadings", SqlDbType.Structured).Value = table;
-                    var added = new List<MeterReading>();
+                    command.Parameters.Add("@newAccounts", SqlDbType.Structured).Value = table;
+                    var added = new List<Account>();
                     await connection.OpenAsync();
 
                     using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
                         {
-                            added.Add(BuildMeterReading(reader));
+                            added.Add(BuildAccount(reader));
                         }
                     }
                     return added;
@@ -48,36 +48,36 @@ namespace MeterReadings.Repository
             }
         }
 
-        public async Task<IEnumerable<MeterReading>> GetReadings()
+        public async Task<IEnumerable<Account>> GetAccounts()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "[MeterReadings].[GetAllReadings]";
+                command.CommandText = "[MeterReadings].[GetAllAccounts]";
                 command.CommandType = CommandType.StoredProcedure;
-                var results = new List<MeterReading>();
+                var results = new List<Account>();
                 await connection.OpenAsync();
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
-                        results.Add(BuildMeterReading(reader));
+                        results.Add(BuildAccount(reader));
                     }
                 }
                 return results;
             }
         }
 
-        public async Task<MeterReading> GetReading(Guid id)
+        public async Task<Account> GetAccount(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "[MeterReadings].[GetReading]";
+                command.CommandText = "[MeterReadings].[GetAccount]";
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add("@Id", SqlDbType.UniqueIdentifier).Value = id;
+                command.Parameters.Add("@AccountId", SqlDbType.Int).Value = id;
 
                 await connection.OpenAsync();
 
@@ -85,7 +85,7 @@ namespace MeterReadings.Repository
                 {
                     while (await reader.ReadAsync())
                     {
-                        return BuildMeterReading(reader);
+                        return BuildAccount(reader);
                     }
                 }
             }
@@ -93,29 +93,28 @@ namespace MeterReadings.Repository
             return null;
         }
 
-        public async Task DeleteReading(Guid id)
+        public async Task DeleteAccount(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "[MeterReadings].[DeleteReading]";
+                command.CommandText = "[MeterReadings].[DeleteAccount]";
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add("@Id", SqlDbType.UniqueIdentifier).Value = id;
+                command.Parameters.Add("@AccountId", SqlDbType.Int).Value = id;
 
                 await connection.OpenAsync();
                 await command.ExecuteReaderAsync();
             }
         }
 
-        private static MeterReading BuildMeterReading(SqlDataReader reader)
+        private static Account BuildAccount(SqlDataReader reader)
         {
-            return new MeterReading()
+            return new Account()
             {
                 AccountId = reader.GetInt32(reader.GetOrdinal("AccountId")),
-                MeterReadingDateTime = reader.GetDateTime(reader.GetOrdinal("MeterReadingDateTime")),
-                MeterReadValue = reader.GetInt32(reader.GetOrdinal("MeterReadValue")),
-                Id = reader.GetGuid(reader.GetOrdinal("Id")),
+                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                LastName = reader.GetString(reader.GetOrdinal("LastName"))
             };
         }
     }

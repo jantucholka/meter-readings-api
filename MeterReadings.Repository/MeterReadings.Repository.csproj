@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAccountRepository.cs" />
     <Compile Include="IMeterReadingsRepository.cs" />
+    <Compile Include="AccountRepository.cs" />
     <Compile Include="MeterReadingsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -72,7 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountFacade.cs" />
     <Compile Include="CsvHelper.cs" />
+    <Compile Include="IAccountFacade.cs" />
     <Compile Include="SchemaExtensionMethods.cs" />
     <Compile Include="IMeterReadingFacade.cs" />
     <Compile Include="MeterReadingFacade.cs" />

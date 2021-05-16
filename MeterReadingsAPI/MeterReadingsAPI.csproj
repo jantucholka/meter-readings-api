@@ -131,6 +131,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ReadingController.cs" />
     <Compile Include="Controllers\MeterReadingUploadsController.cs" />
     <Compile Include="Global.asax.cs">

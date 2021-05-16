@@ -15,11 +15,28 @@ namespace MeterReadingsAPI
         {
             var container = new UnityContainer();
 
-            container.RegisterSingleton<IMeterReadingFacade, MeterReadingFacade>();
-            container.RegisterSingleton<IMeterReadingsRepository, MeterReadingsRepository>();
-            container.RegisterSingleton<IMeterReadingLenientValidator, MeterReadingLenientValidator>();
+            RegisterFacades(container);
+            RegisterRepositories(container);
+            RegisterValidators(container);
 
             return container;
+        }
+
+        private static void RegisterValidators(UnityContainer container)
+        {
+            container.RegisterSingleton<IMeterReadingLenientValidator, MeterReadingLenientValidator>();
+        }
+
+        private static void RegisterRepositories(UnityContainer container)
+        {
+            container.RegisterSingleton<IMeterReadingsRepository, MeterReadingsRepository>();
+            container.RegisterSingleton<IAccountRepository, AccountRepository>();
+        }
+
+        private static void RegisterFacades(UnityContainer container)
+        {
+            container.RegisterSingleton<IMeterReadingFacade, MeterReadingFacade>();
+            container.RegisterSingleton<IAccountFacade, AccountFacade>();
         }
 
         public static void Register(HttpConfiguration config)
