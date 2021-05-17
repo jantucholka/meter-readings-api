@@ -115,7 +115,7 @@ namespace MeterReadings.Tests
 
             // Assert
             result.Should().NotBeNull();
-            result.Errors.Should().Contain("AccountId: 2344, MeterReadingDateTime: 22/04/2019 09:24:00, MeterReadValue: 1002 - AccountId doesn't exist or reading has already been added");
+            result.Errors.Should().Contain("AccountId: 2344, MeterReadingDateTime: 22/04/2019 09:24:00, MeterReadValue: 01002 - AccountId doesn't exist or reading has already been added");
             result.SuccesfullCount.Should().Be(0);
             result.FailedCount.Should().Be(1);
         }

@@ -1,7 +1,7 @@
 ﻿CREATE TYPE Reading as TABLE (
 	[AccountId] int NOT NULL, 
     [MeterReadingDateTime] DATETIME NOT NULL, 
-    [MeterReadValue] int NOT NULL);
+    [MeterReadValue] nvarchar(50) NOT NULL);
 GO
 
 CREATE PROCEDURE [MeterReadings].[AddReadings]

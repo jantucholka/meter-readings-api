@@ -22,7 +22,7 @@ namespace MeterReadings.Repository
                 {
                     table.Columns.Add("AccountId", typeof(int));
                     table.Columns.Add("MeterReadingDateTime", typeof(DateTime));
-                    table.Columns.Add("MeterReadValue", typeof(int));
+                    table.Columns.Add("MeterReadValue", typeof(string));
 
                     foreach (var meterReading in readings)
                     {
@@ -114,7 +114,7 @@ namespace MeterReadings.Repository
             {
                 AccountId = reader.GetInt32(reader.GetOrdinal("AccountId")),
                 MeterReadingDateTime = reader.GetDateTime(reader.GetOrdinal("MeterReadingDateTime")),
-                MeterReadValue = reader.GetInt32(reader.GetOrdinal("MeterReadValue")),
+                MeterReadValue = reader.GetString(reader.GetOrdinal("MeterReadValue")),
                 Id = reader.GetGuid(reader.GetOrdinal("Id")),
             };
         }

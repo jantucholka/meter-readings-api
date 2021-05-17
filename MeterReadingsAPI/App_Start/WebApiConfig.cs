@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using MeterReading.Logic;
 using MeterReading.Logic.Facades;
 using MeterReading.Logic.Validators;
 using MeterReadings.Repository;
@@ -18,8 +19,14 @@ namespace MeterReadingsAPI
             RegisterFacades(container);
             RegisterRepositories(container);
             RegisterValidators(container);
+            RegisterOther(container);
 
             return container;
+        }
+
+        private static void RegisterOther(UnityContainer container)
+        {
+            container.RegisterSingleton<ICsvHelper, CsvHelper>();
         }
 
         private static void RegisterValidators(UnityContainer container)

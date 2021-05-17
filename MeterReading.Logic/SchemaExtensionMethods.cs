@@ -10,7 +10,7 @@ namespace MeterReading.Logic
             var tmp = new MeterReadings.Schema.MeterReading()
             {
                 AccountId = int.TryParse(source.AccountId, out int accountId) ? accountId : throw new ArgumentException($"{source.AccountId} is not an integer"),
-                MeterReadValue = int.TryParse(source.MeterReadValue, out int meterReadValue) ? meterReadValue : throw new ArgumentException($"{source.MeterReadValue} is not an integer"),
+                MeterReadValue = source.MeterReadValue,
                 MeterReadingDateTime = DateTime.TryParseExact(source.MeterReadingDateTime, "dd/MM/yyyy hh:mm", new DateTimeFormatInfo(),
                     DateTimeStyles.AssumeLocal,
                     out DateTime meterReadingDateTime) ? meterReadingDateTime : throw new ArgumentException($"{source.AccountId} is not a datetime"),
