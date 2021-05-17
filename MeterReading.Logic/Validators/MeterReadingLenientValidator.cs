@@ -8,10 +8,10 @@ namespace MeterReading.Logic.Validators
 {
     public class MeterReadingLenientValidator : AbstractValidator<MeterReadingLenient>, IMeterReadingLenientValidator
     {
+        private string[] validDateTimeFormats = new[] {"dd/MM/yyyy hh:mm", "dd/MM/yyyy hh:mm:ss", "dd/MM/yyyy  hh:mm", "dd/MM/yyyy  hh:mm:ss" };
+
         public MeterReadingLenientValidator()
         {
-            // TODO prevent the same entry from being loaded twice
-
             RuleFor(reading => reading.AccountId)
                 .NotNull()
                 .Custom((s, context) =>
@@ -23,18 +23,18 @@ namespace MeterReading.Logic.Validators
                 .NotNull()
                 .Custom((s, context) =>
                 {
-                    if (!DateTime.TryParseExact(s, "dd/MM/yyyy hh:mm", new DateTimeFormatInfo(),
-                        DateTimeStyles.AssumeLocal,
+                    if (!DateTime.TryParseExact(s, validDateTimeFormats, CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
                         out DateTime result))
                     {
-                        context.AddFailure($"{nameof(MeterReadingLenient.MeterReadingDateTime)} must be in the following format: 'dd/MM/yyyy hh:mm'");
+                        context.AddFailure($"{nameof(MeterReadingLenient.MeterReadingDateTime)} must be in one of the following formats: {string.Join(", ", validDateTimeFormats)}");
                     }
                 });
             RuleFor(reading => reading.MeterReadValue)
                 .NotNull()
                 .Custom((s, context) =>
                 {
-                    if (!Regex.IsMatch(s, @"[0-9]{5}"))
+                    if (string.IsNullOrWhiteSpace(s) || !Regex.IsMatch(s, @"[0-9]{5}"))
                         context.AddFailure($"{nameof(MeterReadingLenient.MeterReadValue)} must consist of five digits. Value provided: {s}");
                 });
         }

@@ -13,6 +13,7 @@ using MeterReadings.Repository;
 using MeterReadings.Schema;
 using Moq;
 using NUnit.Framework;
+
 namespace MeterReadings.Tests
 {
     [TestFixture]
