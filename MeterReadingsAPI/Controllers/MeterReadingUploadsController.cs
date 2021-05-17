@@ -10,6 +10,7 @@ using Swashbuckle.Swagger.Annotations;
 
 namespace MeterReadingsAPI.Controllers
 {
+    [RoutePrefix("api")]
     public class MeterReadingUploadsController : ApiController
     {
         private readonly IMeterReadingFacade _meterReadingFacade;
@@ -19,6 +20,7 @@ namespace MeterReadingsAPI.Controllers
             _meterReadingFacade = meterReadingFacade ?? throw new ArgumentNullException(nameof(meterReadingFacade));
         }
 
+        [Route("meter-reading-uploads")]
         [SwaggerResponse(HttpStatusCode.BadRequest,"Only multipart content is allowed")]
         [SwaggerResponse(HttpStatusCode.OK, "Summary of the meter reading upload action", typeof(AddMeterStatusResponse))]
         public async Task<IHttpActionResult> Post()
