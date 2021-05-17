@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 using MeterReading.Logic;
 using MeterReading.Logic.Facades;
 using MeterReading.Logic.Validators;
@@ -48,6 +49,9 @@ namespace MeterReadingsAPI
 
         public static void Register(HttpConfiguration config)
         {
+            var cors = new EnableCorsAttribute("http://localhost:3000", "*", "*");
+            config.EnableCors(cors);
+
             config.DependencyResolver = new UnityDependencyResolver(Container);
 
             // Web API configuration and services
