@@ -9,9 +9,9 @@ using CsvHelper.Configuration;
 
 namespace MeterReading.Logic
 {
-    public class CsvHelper
+    public class CsvHelper : ICsvHelper
     {
-        public static async Task<IEnumerable<T>> ReadCsvFromRequestIntoCollectionOfType<T>(Collection<HttpContent> contents)
+        public async Task<IEnumerable<T>> ReadCsvFromRequestIntoCollectionOfType<T>(Collection<HttpContent> contents)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -23,8 +23,6 @@ namespace MeterReading.Logic
 
             foreach (var file in contents)
             {
-                var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
-                var buffer = await file.ReadAsStringAsync();
                 using (var reader = new StreamReader(await file.ReadAsStreamAsync()))
                 {
                     using (var csv = new CsvReader(reader, config))

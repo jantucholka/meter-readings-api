@@ -75,6 +75,7 @@
     <Compile Include="Facades\AccountFacade.cs" />
     <Compile Include="CsvHelper.cs" />
     <Compile Include="Facades\IAccountFacade.cs" />
+    <Compile Include="ICsvHelper.cs" />
     <Compile Include="SchemaExtensionMethods.cs" />
     <Compile Include="Facades\IMeterReadingFacade.cs" />
     <Compile Include="Facades\MeterReadingFacade.cs" />

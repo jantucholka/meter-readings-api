@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterReadings.Schema", "Met
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterReading.Logic", "MeterReading.Logic\MeterReading.Logic.csproj", "{ECB4E776-410B-40D9-8483-5E97FF3AEB39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterReadings.Tests", "MeterReadings.Tests\MeterReadings.Tests.csproj", "{D889BB27-ADBF-4104-83F9-166406E1C43D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{ECB4E776-410B-40D9-8483-5E97FF3AEB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECB4E776-410B-40D9-8483-5E97FF3AEB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECB4E776-410B-40D9-8483-5E97FF3AEB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D889BB27-ADBF-4104-83F9-166406E1C43D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D889BB27-ADBF-4104-83F9-166406E1C43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D889BB27-ADBF-4104-83F9-166406E1C43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D889BB27-ADBF-4104-83F9-166406E1C43D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

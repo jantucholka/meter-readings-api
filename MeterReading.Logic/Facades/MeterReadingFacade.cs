@@ -14,21 +14,25 @@ namespace MeterReading.Logic.Facades
     {
         public MeterReadingFacade(
             IMeterReadingsRepository meterReadingsRepository,
-            IMeterReadingLenientValidator meterReadingLenientValidator)
+            IMeterReadingLenientValidator meterReadingLenientValidator,
+            ICsvHelper csvHelper)
         {
             _meterReadingsRepository = meterReadingsRepository ??
                                             throw new ArgumentNullException(nameof(meterReadingsRepository));
             _meterReadingLenientValidator = meterReadingLenientValidator ??
                                             throw new ArgumentNullException(nameof(meterReadingLenientValidator));
+            _csvHelper = csvHelper ??
+                         throw new ArgumentNullException(nameof(csvHelper));
         }
 
         private readonly IMeterReadingsRepository _meterReadingsRepository;
         private readonly IMeterReadingLenientValidator _meterReadingLenientValidator;
+        private readonly ICsvHelper _csvHelper;
 
         public async Task<AddMeterStatusResponse> AddMeterReadings(Collection<HttpContent> contents)
         {
             // read csv
-            var readings = await CsvHelper.ReadCsvFromRequestIntoCollectionOfType<MeterReadingLenient>(contents);
+            var readings = await _csvHelper.ReadCsvFromRequestIntoCollectionOfType<MeterReadingLenient>(contents);
 
             var enumeratedMeterReadings = readings.ToList();
 
