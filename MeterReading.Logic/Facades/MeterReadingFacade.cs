@@ -72,7 +72,7 @@ namespace MeterReading.Logic.Facades
 
             return new AddMeterStatusResponse()
             {
-                SuccesfullCount = numberOfSuccessfullyAddedReading,
+                SuccessfulCount = numberOfSuccessfullyAddedReading,
                 FailedCount = enumeratedMeterReadings.Count - numberOfSuccessfullyAddedReading,
                 Errors = errorMessages
             };
